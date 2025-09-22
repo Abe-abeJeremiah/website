@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link href="news.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tagum Health & Sanitation</title>
+  </head>
+
+  <style>
+  body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #c3e9d3;
+}
+
+header {
+  background-color: #3a853e;
+  padding: 30px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  color: white;
+  flex-wrap: wrap;
+}
+
+
+#local-news {
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+
+nav {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  padding: 8px 12px;
+  font-weight:bold;
+}
+
+.vertical-line {
+  width: 1px;
+  height: 24px;
+  background-color: #888;
+  margin: 0 16px;
+}
+
+
+header nav a:hover {
+  font-weight: 800;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  color: black;
+  min-width: 120px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 8px 12px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+}
+
+.search-profile {
+  display: flex;
+  align-items: center;
+  gap: 0px;
+  margin-top: 10px;
+}
+
+form.search-profile input[type="text"] {
+  padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    width: 100%;
+    background: #f1f1f1;
+    flex: 1;
+    border-right: none;
+    border-radius: 2em 0 0 2em;
+  }
+
+form.search-profile button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #045c26;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+  border-radius: 0 2em 2em 0;
+  margin-right: 1rem;
+}
+
+form.search-profile button:hover {
+  background: #28a03c;
+  transition: background-color 0.2s 0.2s;
+}
+
+.profile-dropdown {
+  position: relative;
+}
+
+.profile-dropdown img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.profile-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+}
+
+.profile-dropdown:hover .profile-menu {
+  display: block;
+}
+
+.profile-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.profile-menu li a {
+  display: block;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: black;
+}
+
+.profile-menu li a:hover {
+  background-color: #f1f1f1;
+}
+
+/* Lahi nani na part diri */
+.container {
+  padding: 20px;
+}
+
+.title-section h1 {
+  color: #333;
+  text-align: center;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+.grid-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+  gap: 4em 2em;
+  padding-top: 1rem;
+}
+
+.hotline-box {
+  background-color: rgb(143, 207, 141);
+  padding: 20px;
+  border: 1px black;
+  font-size: 1.5em;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(19, 17, 17, 0.753);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hotline-box p{
+  font-weight: bolder;
+  color: rgba(0, 0, 0, 0.74);
+}
+
+.hotline-box:hover {
+  transition: transform 0.2s;
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.50);
+}
+
+.hotline button:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s;
+}
+
+.hotline button:active {
+  filter: brightness(70%);
+}
+
+.box {
+  background-color: white;
+  padding: 20px;
+  border: 1px black;
+  font-size: 1.5em;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.40);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.box:hover {
+  transition: transform 0.2s;
+  filter: brightness(70%);
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.50);
+}
+
+
+
+.box:active {
+  background-color: #ada8a8;
+}
+
+.hotline {
+  font-size: 0.7em;
+  font-weight: normal;
+  text-align: left;
+}
+
+.hotline-entry {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0;
+  padding: 5px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.74);
+}
+
+.hotline-entry button {
+  background-color: #2e7d32;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.hotline-entry button:hover {
+  transform: scale(1.08);
+}
+
+.hotline-entry button:active {
+  background-color: #032911;
+}
+
+
+.see-all {
+  display: flex;
+  justify-content: center; /* centers horizontally */
+  margin-top: 20px; /* optional spacing */
+}
+
+
+.see-all button {
+  background-color: #2e7d32;
+  color: white;
+  border: none;
+  padding: 10px 20px; /* bigger button */
+  font-size: 16px;     /* slightly larger text */
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  font-weight: bold;
+}
+
+.see-all button:hover {
+  transform: scale(1.08);
+}
+
+.see-all button:active {
+  background-color: #032911;
+}
+
+
+
+
+.site-footer {
+  background-color: #418644;
+  color: #e5e7eb;
+  padding: 40px 20px 20px;
+  font-family: Arial, sans-serif;
+}
+
+.footer-Block {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.Block {
+  flex: 1 1 250px;
+  min-width: 250px;
+}
+
+.Block h2,
+.Block h3 {
+  margin-bottom: 12px;
+  color: #ffffff;
+}
+
+.Block p {
+  font-size: 14px;
+  color: #a7f3d0;
+}
+
+.Block ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.Block ul li {
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.Block a {
+  color: #a7f3d0;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.Block a:hover {
+  color: #6ee7b7;
+  text-decoration: underline;
+}
+
+.footer-bottom {
+  border-top: 1px solid #317434;
+  margin-top: 30px;
+  padding-top: 15px;
+  text-align: center;
+  font-size: 13px;
+  color: white;
+}
+
+@media screen and (max-width: 600px) {
+  header nav a {
+    display: none;
+  }
+
+  .dropdown {
+    display: block;
+  }
+
+  header nav::before {
+    content: "CATEGORIES ▼";
+    color: white;
+    font-weight: bold;
+    margin-right: 10px;
+    display: block;
+    cursor: pointer;
+  }
+
+  header nav:hover a {
+    display: block;
+    margin: 5px 0;
+  }
+}
+  </style>
+
+  <body>
+    <header>
+      <div>
+        <strong id="local-news">LOCAL NEWS</strong>
+      </div>
+
+      <nav>
+        <a href="news.html">HOME</a>
+        <a href = "sports.html" >SPORTS</a>
+        <a href = "culture-events.html" >EVENTS</a>
+        <div class="dropdown">
+          <a>MORE</a>
+          <div class="dropdown-content">
+            <a href = "crime-safety.html" >CRIME & SAFETY</a>
+            <a href = "public-service.html" >PUBLIC SURVEY</a>
+            <a href = "public-governance.html" >PUBLIC GOVERNANCE</a>
+            <a href = "health-sanitation.html" >HEALTH & SANITATION</a>
+            <a href = "traffic-transport.html" >TRAFFIC & TRANSPORT</a>
+            <a href = "economy-business.html" >ECONOMY & BUSINESS</a>
+            <a href = "culture-events.html" >CULTURE & EVENTS</a>
+            <a href = "lifestyle-community.html" >LIFESTYLE & COMMUNITY</a>
+            <a href = "youth-education.html" >YOUTH & EDUCATION</a>
+          </div>
+        </div>
+      </nav>
+      <form class="search-profile">
+        <input type="text" placeholder="Search.." />
+        <button type="submit"><i class="fa fa-search"></i></button>
+        <div class="profile-dropdown">
+          <img src="assets/profile1.png" class="Profile" />
+          <div class="profile-menu">
+            <ul class="menu-list">
+              <li><a href="profile.php">Profile</a></li>
+              <li><a href="About.html">About</a></li>
+              <li><a href="index.html">Logout</a></li>
+            </ul>
+          </div>
+        </div>
+      </form>
+    </header>
+
+    <div class="container">
+      <div class="title-section">
+        <h1>HEALTH & SANITATION</h1>
+      </div>
+
+      <div class="grid-layout">
+        <!-- NEWS 1 -->
+        <a
+          href="https://www.sunstar.com.ph/davao/honeybees-attack-43-parkgoers-in-tagum"
+          target="_blank"
+          style="text-decoration: none; outline: none"
+        >
+          <div
+            class="box"
+            style="
+              background-image: url('https://media.assettype.com/sunstar%2F2025-04-10%2Foh1kln34%2FUntitled-1.jpg?w=1024&auto=format%2Ccompress&fit=max');
+              background-size: cover;
+              background-position: center;
+              height: 250px;
+              color: white;
+              display: flex;
+              align-items: flex-end;
+              border-radius: 10px;
+              overflow: hidden;
+              position: relative;
+            "
+          >
+            <div
+              style="
+                width: 100%;
+                padding: 15px;
+                font-size: 1.2em;
+                font-weight: bold;
+                text-align: left;
+                text-shadow: 1px 1px 3px black;
+              "
+            >
+              Honeybees attack 43 parkgoers in Tagum
+            </div>
+          </div>
+        </a>
+
+        <!-- NEWS 2 -->
+        <a
+          href="https://www.sunstar.com.ph/davao/tagum-dialysis-center-97-complete-to-offer-free-services"
+          target="_blank"
+          style="text-decoration: none; outline: none"
+        >
+          <div
+            class="box"
+            style="
+              background-image: url('https://media.assettype.com/sunstar%2F2025-01-19%2Fl6qs1o94%2FUntitled-1.jpg?w=1024&auto=format%2Ccompress&fit=max');
+              background-size: cover;
+              background-position: center;
+              height: 250px;
+              color: white;
+              display: flex;
+              align-items: flex-end;
+              border-radius: 10px;
+              overflow: hidden;
+              position: relative;
+            "
+          >
+            <div
+              style="
+                width: 100%;
+                padding: 15px;
+                font-size: 1.2em;
+                font-weight: bold;
+                text-align: left;
+                text-shadow: 1px 1px 3px black;
+              "
+            >
+              Tagum Dialysis Center 97% complete, to offer free services
+            </div>
+          </div>
+        </a>
+
+        <!-- NEWS 3 -->
+        <a
+          href="https://mindanews.com/special-reports/2025/03/special-report-efforts-to-fight-dengue-in-tagum-city-come-up-short/#gsc.tab=0"
+          target="_blank"
+          style="text-decoration: none; outline: none"
+        >
+          <div
+            class="box"
+            style="
+              background-image: url('https://mindanews.com/wp-content/uploads/2025/03/30DENGUE_cityhealth-copy.jpg');
+              background-size: cover;
+              background-position: center;
+              height: 250px;
+              color: white;
+              display: flex;
+              align-items: flex-end;
+              border-radius: 10px;
+              overflow: hidden;
+              position: relative;
+            "
+          >
+            <div
+              style="
+                width: 100%;
+                padding: 15px;
+                font-size: 1.2em;
+                font-weight: bold;
+                text-align: left;
+                text-shadow: 1px 1px 3px black;
+              "
+            >
+              SPECIAL REPORT: Efforts to fight dengue in Tagum City come up
+              short
+            </div>
+          </div>
+        </a>
+
+        <!-- NEWS 4 -->
+        <a
+          href="https://pia.gov.ph/wheelchair-of-freedom-redefining-mobility-for-children-with-disability/"
+          target="_blank"
+          style="text-decoration: none; outline: none"
+        >
+          <div
+            class="box"
+            style="
+              background-image: url('https://pia.gov.ph/wp-content/uploads/2024/10/wheelchair-of-freedom.jpg');
+              background-size: cover;
+              background-position: center;
+              height: 250px;
+              color: white;
+              display: flex;
+              align-items: flex-end;
+              border-radius: 10px;
+              overflow: hidden;
+              position: relative;
+            "
+          >
+            <div
+              style="
+                width: 100%;
+                padding: 15px;
+                font-size: 1.2em;
+                font-weight: bold;
+                text-align: left;
+                text-shadow: 1px 1px 3px black;
+              "
+            >
+              Wheelchair of Freedom: Redefining mobility for children with
+              disability
+            </div>
+          </div>
+        </a>
+
+        <!-- NEWS 5 -->
+        <a
+          href="https://tagumcity.gov.ph/?p=4911"
+          target="_blank"
+          style="text-decoration: none; outline: none"
+        >
+          <div
+            class="box"
+            style="
+              background-image: url('https://tagumcity.gov.ph/wp-content/uploads/2025/03/Copy-of-473559744_1021099320060932_8923259894666501059_n.jpg');
+              background-size: cover;
+              background-position: center;
+              height: 250px;
+              color: white;
+              display: flex;
+              align-items: flex-end;
+              border-radius: 10px;
+              overflow: hidden;
+              position: relative;
+            "
+          >
+            <div
+              style="
+                width: 100%;
+                padding: 15px;
+                font-size: 1.2em;
+                font-weight: bold;
+                text-align: left;
+                text-shadow: 1px 1px 3px black;
+              "
+            >
+              LGU TAGUM FOCUSES ON CARE OF CHILDREN WITH SPECIAL NEEDS
+            </div>
+          </div>
+        </a>
+
+        <!-- NEWS 6 -->
+        <a
+          href="https://www.brigadanews.ph/3-suspects-killed-2-cops-injured-in-tagum-city-shootout/"
+          target="_blank"
+          style="text-decoration: none; outline: none"
+        >
+          <div
+            class="box"
+            style="
+              background-image: url('https://www.brigadanews.ph/wp-content/uploads/2025/02/tagum.jpg');
+              background-size: cover;
+              background-position: center;
+              height: 250px;
+              color: white;
+              display: flex;
+              align-items: flex-end;
+              border-radius: 10px;
+              overflow: hidden;
+              position: relative;
+            "
+          >
+            <div
+              style="
+                width: 100%;
+                padding: 15px;
+                font-size: 1.2em;
+                font-weight: bold;
+                text-align: left;
+                text-shadow: 1px 1px 3px black;
+              "
+            >
+              LOCAL NEWS MINDANAO TAGUM
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <footer class="site-footer">
+      <div class="footer-Block">
+        <div class="Block brand">
+          <h2>Tagum News and Support Hotline</h2>
+          <p>
+            Stay updated and supported with Tagum News and E-Hotline - your
+            trusted source for local news and assistance.
+          </p>
+        </div>
+
+        <div class="Block hotlines">
+          <h3>LOCAL HOTLINES</h3>
+          <ul>
+            <li>
+              <strong>Providence Base:</strong>
+              <a href="tel:+639267715666">0926-771-5666</a>
+            </li>
+            <li>
+              <strong>Police Assistance:</strong>
+              <a href="tel:+639274855024">0927-485-5024</a>
+            </li>
+            <li>
+              <strong>Traffic Concern:</strong>
+              <a href="tel:+639108751042">0910-875-1042</a>
+            </li>
+            <li>
+              <strong>Fire Emergency:</strong>
+              <a href="tel:+639267717538">0926-771-7538</a>
+            </li>
+            <li>
+              <strong>City Government:</strong>
+              <a href="tel:+639772551276">0977-255-1276</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="Block links">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="news.html">Home</a></li>
+            <li><a href="#">About Us</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        &copy; 2025 Tagum Today. All rights reserved.
+      </div>
+    </footer>
+  </body>
+</html>
