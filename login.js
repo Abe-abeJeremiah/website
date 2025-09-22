@@ -37,6 +37,7 @@ googleLogin.addEventListener("click", function(){
     const errorMessage = error.message;
   });
 } )
+  
 
 const provider1 = new FacebookAuthProvider();
 document.addEventListener("DOMContentLoaded", function(){
@@ -49,8 +50,7 @@ facebookLogin.addEventListener("click", function(event){
     const user = result.user;
 
     // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-    const credential = FacebookAuthProvider.credentialFromResult(result);
-    const accessToken = credential.accessToken;
+    // const credential = FacebookAuthProvider.credentialFromResult(result);
 
     console.log(user);
     window.location.href = "news.html";
