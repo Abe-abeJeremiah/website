@@ -50,7 +50,7 @@ submit.addEventListener("click", function (e) {
 
   const email = document.getElementById("email").value;
   const username = document.getElementById("Username").value;
-  const password = document.getElementById("password").value;
+  const password = document.getElementById("Ppassword").value;
   const cpassword = document.getElementById("Cpassword").value;
 
   if (password !== cpassword) {

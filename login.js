@@ -38,6 +38,14 @@ googleLogin.addEventListener("click", function(){
   });
 } )
   
+// Load the Facebook SDK asynchronously
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) { return; }
+  js = d.createElement(s); js.id = id;
+  js.src = "https://connect.facebook.net/en_US/sdk.js";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
 
 const provider1 = new FacebookAuthProvider();
 document.addEventListener("DOMContentLoaded", function(){
@@ -78,7 +86,7 @@ loginForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
   const email = document.getElementById("Iemail").value;
-  const password = document.getElementById("Ipassword").value;
+  const password = document.getElementById("Ppassword").value;
   const rememberMe = document.getElementById("remember-me-checkbox").checked;
 
   const persistence = rememberMe ? browserLocalPersistence : browserSessionPersistence;
@@ -98,7 +106,7 @@ loginForm.addEventListener("submit", (e) => {
 });
 
 window.togglePassword = function () {
-  const passwordInput = document.getElementById("Ipassword");
+  const passwordInput = document.getElementById("Ppassword");
   const eyeIcon = document.querySelector(".eye-icon svg");
 
   if (passwordInput.type === "password") {
