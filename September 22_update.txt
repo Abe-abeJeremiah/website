@@ -1,0 +1,13 @@
+September 22:
+Progress:
+
+Added function for toggling show password, made the passwords have the same ID, and confirm password with Cpassword, then made the buttons hover underline when pointed, also added Forgot password part, css of it still is lacking, need more designing
+
+files edited/added:
+index.html
+signup.html
+login_style.css
+stylessignup.css
+-------------------
+forgotpass.html
+forgotpass.css
