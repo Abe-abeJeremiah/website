@@ -33,13 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             await sendPasswordResetEmail(auth, email);
 
-            if (response.ok) {
-                alert('If this email is registered, a password reset link has been sent.');
-                form.reset();
-            } else {
-                const data = await response.json();
-                alert(data.message || 'Failed to send reset link. Please try again.');
-            }
+            alert('If this email is registered, a password reset link has been sent.');
+            form.reset();
         } catch (error) {
             alert('An error occurred. Please try again later.');
         }
