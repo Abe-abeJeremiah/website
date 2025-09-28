@@ -130,3 +130,11 @@ window.togglePassword = function () {
   }
 };
 
+signInWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Redirect after login
+    window.location.href = "profile.html";
+  })
+  .catch((error) => {
+    alert(error.message);
+  });
