@@ -1,331 +1,241 @@
+/* ---------- Global ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
 body {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-        Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-    background-color: rgb(191, 245, 209);
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+  background: #d0eed6;          
+  color: #222;
+  line-height: 1.5;
 }
 
-.profile-container {
-    background-color: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    padding: 30px;
-    width: 90%;
-    max-width: 500px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+/* ---------- Header ---------- */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #367a3a;          
+  padding: 0.8rem 2rem;
+  color: #fff;
 }
 
-.profile-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 25px;
-    text-align: center;
-    width: 100%;
+#local-news {
+  font-size: 1.8rem;
+  font-weight: 700;
 }
 
-.profile-image-container {
-    width: 80px; /* Increased size */
-    height: 80px; /* Increased size */
-    border-radius: 50%;
-    overflow: hidden;
-    margin-bottom: 20px;
-    border: 2px solid rgb(0, 0, 0);
-    display: flex; /* Add this */
-    justify-content: center; /* Add this */
-    align-items: center; /* Add this */
+nav a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 1rem;
+  font-weight: 600;
+  transition: color 0.2s;
 }
 
-#profileImage {
-    display: block;
-    width: 80%; /* Adjust this percentage to control the icon's size */
-    height: auto; /* Maintain aspect ratio */
-    max-width: none; /* Override any max-width */
-    max-height: none; /* Override any max-height */
-    object-fit: contain; /* Make sure the whole icon is visible */
+nav a:hover {
+  color: #f0f0f0;
 }
 
-.profile-info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
+/* Dropdown menu */
+.dropdown {
+  position: relative;
+  display: inline-block;
 }
 
-#profileName {
-    font-size: 1.6em;
-    font-weight: 600;
-    margin-bottom: 8px;
-    color: #263238;
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #4e9a53;
+  min-width: 220px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  z-index: 1;
 }
 
-.name-separator {
-    width: 100%;
-    height: 1px;
-    background: linear-gradient(to right, transparent, #000000, transparent);
-    margin: 8px 0;
+.dropdown-content a {
+  color: #fff;
+  padding: 10px 16px;
+  text-decoration: none;
+  display: block;
 }
 
-#profileBio {
-    color: #455a64;
-    margin-bottom: 20px;
-    line-height: 1.6;
-    overflow-wrap: break-word;
-    width: 100%;
-    margin-top: 15px;
-    text-align: center; /* Center the bio text */
+.dropdown-content a:hover {
+  background-color: #3d8041;
 }
 
-.profile-actions {
-    display: flex;
-    gap: 15px;
-    margin-top: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 100%;
+.dropdown:hover .dropdown-content {
+  display: block;
 }
 
-.profile-actions button {
-    background-color: #e1f5fe;
-    color: #1e88e5;
-    border: 1px solid #1e88e5;
-    border-radius: 8px;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 0.95em;
-    transition: background-color 0.3s ease;
+/* Search + profile icon */
+.search-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
 }
 
-.profile-actions button:hover {
-    background-color: #b3e5fc;
+.search-profile input {
+  padding: 6px 10px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
 }
 
-.profile-actions button.animate-click {
-    animation: pulse 0.3s ease-in-out;
+.search-profile button {
+  background: #245528;
+  color: #fff;
+  border: none;
+  padding: px 10px;
+  border-radius: 20px;
+  cursor: pointer;
 }
 
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.1);
-    }
-    100% {
-        transform: scale(1);
-    }
+.profile-dropdown {
+  position: relative;
 }
 
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
+.profile-dropdown img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
-.modal-content {
-    background-color: #fff;
-    margin: 10% auto;
-    padding: 30px;
-    border: 1px solid #cfd8dc;
-    border-radius: 12px;
-    width: 90%;
-    max-width: 450px;
-    position: relative;
+.profile-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  background: #4e9a53;
+  border-radius: 6px;
+  overflow: hidden;
 }
 
-.close-button {
-    color: #b0bec5;
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
+.profile-dropdown:hover .profile-menu {
+  display: block;
 }
 
-.close-button:hover,
-.close-button:focus {
-    color: #455a64;
-    text-decoration: none;
+.profile-menu ul {
+  list-style: none;
 }
 
-h2 {
-    font-size: 1.4em;
-    font-weight: 600;
-    margin-bottom: 20px;
-    color: #263238;
-    text-align: center;
+.profile-menu li a {
+  display: block;
+  padding: 10px 16px;
+  color: #fff;
+  text-decoration: none;
 }
 
-label {
-    display: block;
-    margin-bottom: 8px;
-    color: #455a64;
-    font-weight: 500;
+.profile-menu li a:hover {
+  background: #3d8041;
 }
 
-input[type="text"],
-textarea {
-    width: calc(100% - 16px);
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #b0bec5;
-    border-radius: 6px;
-    box-sizing: border-box;
-    font-size: 1em;
-    color: #455a64;
+/* ---------- Profile Section ---------- */
+.container {
+  max-width: 960px;
+  margin: 2rem auto;
+  padding: 0 1rem;
 }
 
-textarea {
-    resize: vertical;
-    min-height: 100px;
+.usertitle-section h1 {
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-size: 2rem;
+  color: #2d5f30;
 }
 
-#saveInfoBtn {
-    background-color: #1e88e5;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 12px 25px;
-    cursor: pointer;
-    font-size: 1em;
-    transition: background-color 0.3s ease;
+.profile-layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
 }
 
-#saveInfoBtn:hover {
-    background-color: #1565c0;
+.profile-card,
+.profile-edit {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  flex: 1 1 280px;
+  max-width: 360px;
+  text-align: center;
 }
 
-@media (max-width: 600px) {
-    .profile-container {
-        border-radius: 0;
-        box-shadow: none;
-        padding: 20px;
-    }
-
-    .profile-image-container {
-        width: 120px; /* Adjusted size for smaller screens */
-        height: 120px; /* Adjusted size for smaller screens */
-        margin-bottom: 15px;
-        border-color: rgb(0, 0, 0);
-    }
-
-    #profileName {
-        font-size: 1.4em;
-        color: #263238;
-    }
-
-    .name-separator {
-        margin: 6px 0;
-        background: linear-gradient(to right, transparent, #000000, transparent);
-    }
-
-    #profileBio {
-        font-size: 0.9em;
-        margin-top: 10px;
-        color: #455a64;
-        text-align: center; /* Center bio on smaller screens too */
-    }
-
-    .profile-actions {
-        gap: 10px;
-    }
-
-    .profile-actions button {
-        padding: 10px 15px;
-        font-size: 0.9em;
-        background-color: #e1f5fe;
-        color: #1e88e5;
-        border-color: #1e88e5;
-    }
-
-    .modal-content {
-        margin-top: 15%;
-        border-radius: 8px;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-        border-color: #cfd8dc;
-    }
-
-    .close-button {
-        color: #b0bec5;
-    }
-
-    h2 {
-        color: #263238;
-    }
-
-    label {
-        color: #455a64;
-    }
-
-    input[type="text"],
-    textarea {
-        color: #455a64;
-        border-color: #b0bec5;
-    }
+.profile-card img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
+  border: 4px solid #367a3a;
 }
 
-#saveInfoBtn {
-    background-color: #e1f5fe; /* Same background */
-    color: #1e88e5; /* Same text color */
-    border: 1px solid #1e88e5; /* Same border */
-    border-radius: 8px; /* Same border radius */
-    padding: 10px 20px; /* Same padding */
-    cursor: pointer;
-    font-size: 0.95em; /* Slightly smaller font size like "Edit Bio" */
-    transition: background-color 0.3s ease;
+.profile-card h2 {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
 }
 
-#saveInfoBtn:hover {
-    background-color: #b3e5fc; /* Same hover effect */
+.profile-edit input {
+  width: 100%;
+  padding: 0.6rem;
+  margin: 0.6rem 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
 }
 
-button[name="saveBio"] {
-    background-color: #e1f5fe;
-    color: #1e88e5;
-    border: 1px solid #1e88e5;
-    border-radius: 8px;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 0.95em;
-    transition: background-color 0.3s ease;
+.profile-edit button {
+  background: #367a3a;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
 }
 
-button[name="saveBio"]:hover {
-    background-color: #b3e5fc;
+.profile-edit button:hover {
+  background: #2d5f30;
 }
-@media (max-width: 400px) {
-    .profile-actions button {
-        padding: 8px 12px;
-        font-size: 0.85em;
-    }
 
-    .name-separator {
-        margin: 4px 0;
-    }
+/* ---------- Footer ---------- */
+.site-footer {
+  background: #367a3a;
+  color: #fff;
+  padding: 2rem 1rem;
+  margin-top: 3rem;
+}
 
-    #profileBio {
-        font-size: 0.9em;
-        margin-top: 10px;
-    }
+.footer-Block {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: space-between;
+}
 
-    .modal-content {
-        border-radius: 6px;
-    }
+.footer-Block .Block {
+  flex: 1 1 250px;
+}
 
-    .profile-image-container {
-        border-color: rgb(0, 0, 0);
-    }
+.footer-Block h2,
+.footer-Block h3 {
+  margin-bottom: 0.6rem;
+}
+
+.footer-Block a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.footer-Block a:hover {
+  text-decoration: underline;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  border-top: 1px solid rgba(255,255,255,0.2);
+  padding-top: 1rem;
 }

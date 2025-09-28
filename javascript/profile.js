@@ -1,83 +1,61 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const profileImage = document.getElementById('profileImage');
-    const imageUpload = document.getElementById('imageUpload');
-    const editImageBtn = document.getElementById('editImageBtn');
-    const profileName = document.getElementById('profileName');
-    const profileBio = document.getElementById('profileBio');
-    const editInfoBtn = document.getElementById('editInfoBtn');
-    const editModal = document.getElementById('editModal');
-    const closeButton = editModal.querySelector('.close-button');
-    const nameInput = document.getElementById('nameInput');
-    const bioInput = document.getElementById('bioInput');
-    const saveInfoBtn = document.getElementById('saveInfoBtn');
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut, updateProfile } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
 
-    // Load saved data (if any)
-    const savedName = localStorage.getItem('profileName');
-    const savedBio = localStorage.getItem('profileBio');
-    const savedImage = localStorage.getItem('profileImage');
+const firebaseConfig = {
+  apiKey: "AIzaSyAcjbUD8sY7nUN_FuQSJDEszBl1EvjRzoM",
+  authDomain: "knee-gears.firebaseapp.com",
+  projectId: "knee-gears",
+  storageBucket: "knee-gears.appspot.com",
+  messagingSenderId: "640549414918",
+  appId: "1:640549414918:web:ac8f5b8ae40c92ee9a3b87",
+  measurementId: "G-X9DW3QH8DV"
+};
 
-    if (savedName) {
-        profileName.textContent = savedName;
-    }
-    if (savedBio) {
-        profileBio.textContent = savedBio;
-    }
-    if (savedImage) {
-        profileImage.src = savedImage;
-    }
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
-    // Change Profile Picture
-    editImageBtn.addEventListener('click', () => {
-        imageUpload.click();
-    });
-
-    imageUpload.addEventListener('change', (event) => {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                profileImage.src = e.target.result;
-                localStorage.setItem('profileImage', e.target.result); // Save to local storage
-            };
-            reader.readAsDataURL(file);
-        }
-    });
-
-    // Edit Info Modal
-    editInfoBtn.addEventListener('click', () => {
-        editInfoBtn.classList.add('animate-click'); // Add animation class
-        setTimeout(() => {
-            editInfoBtn.classList.remove('animate-click'); // Remove class after animation
-            nameInput.value = profileName.textContent;
-            bioInput.value = profileBio.textContent;
-            editModal.style.display = 'block';
-        }, 300); // Match the animation duration
-    });
-
-    closeButton.addEventListener('click', () => {
-        editModal.style.display = 'none';
-    });
-
-    window.addEventListener('click', (event) => {
-        if (event.target === editModal) {
-            editModal.style.display = 'none';
-        }
-    });
-
-    // Save Edited Info
-    saveInfoBtn.addEventListener('click', () => {
-        const newName = nameInput.value.trim();
-        const newBio = bioInput.value.trim();
-
-        if (newName) {
-            profileName.textContent = newName;
-            localStorage.setItem('profileName', newName); // Save to local storage
-        }
-        if (newBio) {
-            profileBio.textContent = newBio;
-            localStorage.setItem('profileBio', newBio); // Save to local storage
-        }
-
-        editModal.style.display = 'none';
-    });
+// Load user info
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    document.getElementById("user-name").innerText = user.displayName || "No name set";
+    document.getElementById("user-email").innerText = user.email;
+    document.getElementById("user-photo").src = user.photoURL || "https://via.placeholder.com/120";
+    document.getElementById("nav-photo").src = user.photoURL || "assets/profile1.png";
+  } else {
+    window.location.href = "index.html";
+  }
 });
+
+// Update profile
+window.updateUserProfile = async function () {
+  const user = auth.currentUser;
+  if (!user) return;
+
+  const newName = document.getElementById("newName").value.trim();
+  const newPhoto = document.getElementById("newPhoto").value.trim();
+
+  try {
+    await updateProfile(user, {
+      displayName: newName || user.displayName,
+      photoURL: newPhoto || user.photoURL
+    });
+
+    alert("Profile updated!");
+    document.getElementById("user-name").innerText = newName || user.displayName;
+    document.getElementById("user-photo").src = newPhoto || user.photoURL;
+    document.getElementById("nav-photo").src = newPhoto || user.photoURL;
+
+  } catch (error) {
+    console.error("Update error:", error);
+    alert("Failed to update profile: " + error.message);
+  }
+};
+
+// Logout
+window.logout = function () {
+  signOut(auth).then(() => {
+    window.location.href = "index.html";
+  }).catch((error) => {
+    console.error("Logout Error:", error);
+  });
+};
