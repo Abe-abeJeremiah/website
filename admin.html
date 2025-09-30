@@ -11,7 +11,7 @@
 </head>
 
 <body>
-  <!-- HEADER (same as news.html) -->
+  
   <header>
     <div>
       <strong id="local-news">TAGUM NEWS</strong>
@@ -52,46 +52,66 @@
     </form>
   </header>
 
-  <!-- PROFILE SECTION -->
+  
   <div class="container">
     <div class="usertitle-section">
       <h1>Admin Profile</h1>
     </div>
 
-    <div class="profile-layout">
-      <!-- Profile Card -->
-      <div class="profile-card">
-        <img id="user-photo" src="https://via.placeholder.com/150" alt="User Photo">
-        <h2 id="user-name">Loading...</h2>
-        <p id="user-email"></p>
+    <div class="profile-container">
+      
+      <div class="admin-profile-card">
+        <div class="profile-card">
+          <img id="user-photo" src="https://via.placeholder.com/150" alt="User Photo">
+          <h2 id="user-name">Loading...</h2>
+          <p id="user-email"></p>
+        </div>
       </div>
 
-      <!-- Edit Profile Card -->
-      <div class="profile-edit">
-        <h3>Edit Profile</h3>
-        <input type="text" id="newName" placeholder="Enter new name">
       
-        <!-- Photo URL input -->
-        <input type="text" id="newPhoto" placeholder="Enter photo URL (https://...)">
-      
-        <!-- Save Button -->
-        <button type="button" onclick="updateUserProfile()">Save</button>
-      </div>
+      <div class="edit-profile-card">
+        <div class="profile-edit">
+          <h3>Edit Profile</h3>
+          <input type="text" id="newName" placeholder="Enter new name">
 
-      <!-- Add Article Form -->
-      <div class="profile-edit">
-        <h3>Add Article</h3>
-        <input type="url" id="articleUrl" placeholder="Enter article URL">
-        <input type="text" id="articleTitleSimple" placeholder="Enter news title">
-        <input type="url" id="articleCoverUrl" placeholder="Enter cover photo URL">
-        <button id="publishArticleBtn">Publish Article</button>
-        <div id="status" class="status-text"></div>
+          
+          <input type="text" id="newPhoto" placeholder="Enter photo URL (https://...)">
+
+          
+          <button type="button" onclick="updateUserProfile()">Save</button>
+        </div>
+
+        
+        <div class="profile-edit">
+          <h3>Add Article</h3>
+          <input type="url" id="articleUrl" placeholder="Enter article URL">
+          <input type="text" id="articleTitleSimple" placeholder="Enter news title">
+          <input type="url" id="articleCoverUrl" placeholder="Enter cover photo URL">
+          <button id="publishArticleBtn">Publish Article</button>
+          <div id="status" class="status-text"></div>
+        </div>
+
+        
+        <div class="profile-edit">
+          <h3>Manage Articles</h3>
+          <div id="articlesList" style="display:flex;flex-direction:column;gap:10px"></div>
+        </div>
+
+        
+        <div class="profile-edit">
+          <h3>Edit Article</h3>
+          <input type="text" id="editArticleId" placeholder="Enter article ID">
+          <input type="text" id="editArticleTitle" placeholder="New title">
+          <input type="url" id="editArticleCover" placeholder="New cover photo URL">
+          <button id="saveArticleEditsBtn">Save Changes</button>
+          <div id="editStatus" class="status-text"></div>
+        </div>
       </div>
     </div>
   </div>
 
   <br><br><br><br>
- 
+
   <footer class="site-footer">
     <div class="footer-Block">
       <div class="Block brand">
@@ -120,4 +140,5 @@
     <div class="footer-bottom">&copy; 2025 Tagum Today. All rights reserved.</div>
   </footer>
 </body>
+
 </html>
