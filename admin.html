@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link href="css/admin.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Profile - Tagum News</title>
+  <script type="module" src="javascript/admin.js" defer></script>
+</head>
+
+<body>
+  <!-- HEADER (same as news.html) -->
+  <header>
+    <div>
+      <strong id="local-news">TAGUM NEWS</strong>
+    </div>
+
+    <nav>
+      <a href="news.html">HOME</a>
+      <a href="sports.html">SPORTS</a>
+      <a href="culture-events.html">EVENTS</a>
+      <div class="dropdown">
+        <a>MORE</a>
+        <div class="dropdown-content">
+          <a href="crime-safety.html">CRIME & SAFETY</a>
+          <a href="public-service.html">PUBLIC SERVICE</a>
+          <a href="public-governance.html">PUBLIC GOVERNANCE</a>
+          <a href="health-sanitation.html">HEALTH & SANITATION</a>
+          <a href="traffic-transport.html">TRAFFIC & TRANSPORT</a>
+          <a href="economy-business.html">ECONOMY & BUSINESS</a>
+          <a href="culture-events.html">CULTURE & EVENTS</a>
+          <a href="lifestyle-community.html">LIFESTYLE & COMMUNITY</a>
+          <a href="youth-education.html">YOUTH & EDUCATION</a>
+        </div>
+      </div>
+    </nav>
+
+    <form class="search-profile">
+      <input type="text" placeholder="Search.." />
+      <button type="submit"><i class="fa fa-search"></i></button>
+      <div class="profile-dropdown">
+        <img src="assets/profile1.png" id="nav-photo" class="Profile" />
+        <div class="profile-menu">
+          <ul class="menu-list">
+            <li><a href="About.html">About</a></li>
+            <li><a href="#" onclick="logout()">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </form>
+  </header>
+
+  <!-- PROFILE SECTION -->
+  <div class="container">
+    <div class="usertitle-section">
+      <h1>Admin Profile</h1>
+    </div>
+
+    <div class="profile-layout">
+      <!-- Profile Card -->
+      <div class="profile-card">
+        <img id="user-photo" src="https://via.placeholder.com/150" alt="User Photo">
+        <h2 id="user-name">Loading...</h2>
+        <p id="user-email"></p>
+      </div>
+
+      <!-- Edit Profile Card -->
+      <div class="profile-edit">
+        <h3>Edit Profile</h3>
+        <input type="text" id="newName" placeholder="Enter new name">
+      
+        <!-- Photo URL input -->
+        <input type="text" id="newPhoto" placeholder="Enter photo URL (https://...)">
+      
+        <!-- Save Button -->
+        <button type="button" onclick="updateUserProfile()">Save</button>
+      </div>
+
+      <!-- Add Article Form -->
+      <div class="profile-edit">
+        <h3>Add Article</h3>
+        <input type="url" id="articleUrl" placeholder="Enter article URL">
+        <input type="text" id="articleTitleSimple" placeholder="Enter news title">
+        <input type="url" id="articleCoverUrl" placeholder="Enter cover photo URL">
+        <button id="publishArticleBtn">Publish Article</button>
+        <div id="status" class="status-text"></div>
+      </div>
+    </div>
+  </div>
+
+  <br><br><br><br>
+ 
+  <footer class="site-footer">
+    <div class="footer-Block">
+      <div class="Block brand">
+        <h2>Tagum News and Support Hotline</h2>
+        <p>
+          Stay updated and supported with Tagum News and E-Hotline - your
+          trusted source for local news and assistance.
+        </p>
+      </div>
+      <div class="Block hotlines">
+        <h3>LOCAL HOTLINES</h3>
+        <ul>
+          <li><strong>Police Assistance:</strong> <a href="tel:+639274855024">0927-485-5024</a></li>
+          <li><strong>Traffic Concern:</strong> <a href="tel:+639108751042">0910-875-1042</a></li>
+          <li><strong>Fire Emergency:</strong> <a href="tel:+639267717538">0926-771-7538</a></li>
+        </ul>
+      </div>
+      <div class="Block links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="news.html">Home</a></li>
+          <li><a href="About.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2025 Tagum Today. All rights reserved.</div>
+  </footer>
+</body>
+</html>
