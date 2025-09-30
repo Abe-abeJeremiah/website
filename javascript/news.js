@@ -14,6 +14,43 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    document.getElementById("user-name").innerText = user.displayName || "No name set";
+    document.getElementById("user-email").innerText = user.email;
+    document.getElementById("user-photo").src = user.photoURL || "https://via.placeholder.com/120";
+    document.getElementById("nav-photo").src = user.photoURL || "assets/profile1.png";
+  } else {
+    window.location.href = "index.html";
+  }
+});
+
+// Update profile
+window.updateUserProfile = async function () {
+  const user = auth.currentUser;
+  if (!user) return;
+
+  const newName = document.getElementById("newName").value.trim();
+  const newPhoto = document.getElementById("newPhoto").value.trim();
+
+  try {
+    await updateProfile(user, {
+      displayName: newName || user.displayName,
+      photoURL: newPhoto || user.photoURL
+    });
+
+    alert("Profile updated!");
+    document.getElementById("user-name").innerText = newName || user.displayName;
+    document.getElementById("user-photo").src = newPhoto || user.photoURL;
+    document.getElementById("nav-photo").src = newPhoto || user.photoURL;
+
+  } catch (error) {
+    console.error("Update error:", error);
+    alert("Failed to update profile: " + error.message);
+  }
+};
+
+
 window.logout = function () {
   signOut(auth)
     .then(() => {

@@ -37,6 +37,18 @@ padding: 8px 12px;
 font-weight:bold;
 }
 
+nav a.active {
+  border-bottom: 3px solid #fff;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+nav a.active-more {
+  border-bottom: 3px solid #3a853e;
+  font-weight: bold;
+  color: #3a853e;
+}
+
 .vertical-line {
 width: 1px;
 height: 24px;
@@ -172,10 +184,12 @@ padding: 20px;
 }
 
 .title-section h1 {
-color: #333;
-text-align: center;
-padding-top: 0.5em;
-padding-bottom: 0.5em;
+  font-size: 2.3rem;
+  font-weight: 800;
+  color: #2e7d32;
+  margin-bottom: 10px;
+  letter-spacing: -0.5px;
+  text-align: center;
 }
 
 .grid-layout {

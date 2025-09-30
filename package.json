@@ -1,0 +1,24 @@
+{
+  "name": "website",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "javascript/openai.js",
+  "scripts": {
+    "start": "node javascript/openai.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Abe-abeJeremiah/website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Abe-abeJeremiah/website/issues"
+  },
+  "homepage": "https://github.com/Abe-abeJeremiah/website#readme",
+  "description": "",
+  "dependencies": {
+    "openai": "^5.23.1"
+  }
+}

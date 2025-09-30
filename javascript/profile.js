@@ -1,5 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
 import { getAuth, onAuthStateChanged, signOut, updateProfile } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+import { getFirestore, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAcjbUD8sY7nUN_FuQSJDEszBl1EvjRzoM",
@@ -13,20 +14,34 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
 
 // Load user info
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, async (user) => {
   if (user) {
-    document.getElementById("user-name").innerText = user.displayName || "No name set";
-    document.getElementById("user-email").innerText = user.email;
-    document.getElementById("user-photo").src = user.photoURL || "https://via.placeholder.com/120";
-    document.getElementById("nav-photo").src = user.photoURL || "assets/profile1.png";
+    try {
+      const userDoc = await getDoc(doc(db, "users", user.uid));
+
+      if (userDoc.exists()) {
+        const data = userDoc.data();
+        document.getElementById("user-name").innerText = data.username || "No username set";
+      } else {
+        document.getElementById("user-name").innerText = user.displayName || "No name set";
+      }
+
+      document.getElementById("user-email").innerText = user.email;
+      document.getElementById("user-photo").src = user.photoURL || "https://via.placeholder.com/120";
+      document.getElementById("nav-photo").src = user.photoURL || "assets/profile1.png";
+
+    } catch (err) {
+      console.error("Error fetching Firestore user:", err);
+    }
   } else {
     window.location.href = "index.html";
   }
 });
 
-// Update profile
+// Update profile (Firestore + Auth displayName/photo)
 window.updateUserProfile = async function () {
   const user = auth.currentUser;
   if (!user) return;
@@ -35,10 +50,18 @@ window.updateUserProfile = async function () {
   const newPhoto = document.getElementById("newPhoto").value.trim();
 
   try {
+    // Update Auth profile
     await updateProfile(user, {
       displayName: newName || user.displayName,
       photoURL: newPhoto || user.photoURL
     });
+
+    // Update Firestore username
+    if (newName) {
+      await updateDoc(doc(db, "users", user.uid), {
+        username: newName
+      });
+    }
 
     alert("Profile updated!");
     document.getElementById("user-name").innerText = newName || user.displayName;

@@ -1,9 +1,21 @@
 // Import Firebase SDKs
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-analytics.js";
-import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, FacebookAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
-import { setPersistence, browserLocalPersistence, browserSessionPersistence } 
-from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  FacebookAuthProvider,
+  signInWithPopup,
+  setPersistence,
+  browserSessionPersistence,
+} from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+
+import {
+  getFirestore,
+  doc,
+  getDoc,
+} from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
 // Firebase config
 const firebaseConfig = {
@@ -13,65 +25,63 @@ const firebaseConfig = {
   storageBucket: "knee-gears.firebasestorage.app",
   messagingSenderId: "640549414918",
   appId: "1:640549414918:web:ac8f5b8ae40c92ee9a3b87",
-  measurementId: "G-X9DW3QH8DV"
+  measurementId: "G-X9DW3QH8DV",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const auth = getAuth(app);
-auth.languageCode = 'en'
+const db = getFirestore(app);
+auth.languageCode = "en";
+
+// ---------------- GOOGLE LOGIN ----------------
 const provider = new GoogleAuthProvider();
+const googleLogin = document.getElementById("google-login-btn");
 
-const googleLogin = document.getElementById("google-login-btn")
-googleLogin.addEventListener("click", function(){
+googleLogin.addEventListener("click", function () {
   signInWithPopup(auth, provider)
-  .then((result) => {
-    const credential = GoogleAuthProvider.credentialFromResult(result);
-    const user = result.user;
-    console.log(user);
-    window.location.href = "news.html";
+    .then(async (result) => {
+      const user = result.user;
 
-  }).catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-  });
-} )
+      // ✅ Check if user already exists in Firestore
+      const userDoc = await getDoc(doc(db, "users", user.uid));
+      if (!userDoc.exists()) {
+        // 🚫 Prevent login if not signed up
+        alert("This Google account is not registered. Please sign up first.");
+        await auth.signOut();
+        return;
+      }
 
+      console.log("Google login success:", user.displayName || user.email);
+      window.location.href = "news.html";
+    })
+    .catch((error) => {
+      console.error("Google login error:", error.message);
+      alert(error.message);
+    });
+});
+
+// ---------------- FACEBOOK LOGIN ----------------
 const provider1 = new FacebookAuthProvider();
-document.addEventListener("DOMContentLoaded", function(){
-const facebookLogin = document.getElementById("facebook-btn");
-facebookLogin.addEventListener("click", function(event){
-  event.preventDefault();
-  signInWithPopup(auth, provider1)
-  .then((result) => {
-    // The signed-in user info.
-    const user = result.user;
-
-    // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-    const credential = FacebookAuthProvider.credentialFromResult(result);
-    const accessToken = credential.accessToken;
-
-    console.log(user);
-    window.location.href = "news.html";
-
-  })
-  .catch((error) => {
-    // Handle Errors here.
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    alert(errorMessage);
-    const email = error.customData.email;
-    // The AuthCredential type that was used.
-    const credential = FacebookAuthProvider.credentialFromError(error);
-
-    // ...
+document.addEventListener("DOMContentLoaded", function () {
+  const facebookLogin = document.getElementById("facebook-btn");
+  facebookLogin.addEventListener("click", function (event) {
+    event.preventDefault();
+    signInWithPopup(auth, provider1)
+      .then((result) => {
+        const user = result.user;
+        console.log("Facebook login success:", user.displayName || user.email);
+        window.location.href = "news.html";
+      })
+      .catch((error) => {
+        console.error("Facebook login error:", error.message);
+        alert(error.message);
+      });
   });
+});
 
-})
-})
-
-// Select the form
+// ---------------- EMAIL + PASSWORD LOGIN ----------------
 const loginForm = document.querySelector(".form-box");
 
 loginForm.addEventListener("submit", (e) => {
@@ -79,9 +89,8 @@ loginForm.addEventListener("submit", (e) => {
 
   const email = document.getElementById("Iemail").value;
   const password = document.getElementById("Ppassword").value;
-  const rememberMe = document.getElementById("remember-me-checkbox").checked;
 
-  const persistence = rememberMe ? browserLocalPersistence : browserSessionPersistence;
+  const persistence = browserSessionPersistence;
 
   setPersistence(auth, persistence)
     .then(() => {
@@ -97,6 +106,7 @@ loginForm.addEventListener("submit", (e) => {
     });
 });
 
+// ---------------- PASSWORD TOGGLE ----------------
 window.togglePassword = function () {
   const passwordInput = document.getElementById("Ppassword");
   const eyeIcon = document.querySelector(".eye-icon svg");
@@ -129,12 +139,3 @@ window.togglePassword = function () {
     `;
   }
 };
-
-signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Redirect after login
-    window.location.href = "profile.html";
-  })
-  .catch((error) => {
-    alert(error.message);
-  });
