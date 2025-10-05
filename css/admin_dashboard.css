@@ -1,0 +1,282 @@
+/* ============================================================
+   ADMIN DASHBOARD — consistent with home.css look & structure
+   ============================================================ */
+
+/* ---------- BODY ---------- */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #c3e9d3;
+}
+
+/* ---------- HEADER ---------- */
+header {
+  background-color: #3a853e;
+  padding: 30px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  color: white;
+  flex-wrap: wrap;
+}
+
+#local-news {
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+nav {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  padding: 8px 12px;
+  font-weight: bold;
+}
+
+nav a.active {
+  border-bottom: 3px solid #fff;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+nav a:hover {
+  font-weight: 800;
+}
+
+.search-profile {
+  display: flex;
+  align-items: center;
+  gap: 0px;
+  margin-top: 10px;
+}
+
+form.search-profile input[type="text"] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 100%;
+  background: #f1f1f1;
+  flex: 1;
+  border-right: none;
+  border-radius: 2em 0 0 2em;
+}
+
+form.search-profile button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #045c26;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+  border-radius: 0 2em 2em 0;
+  margin-right: 1rem;
+}
+
+form.search-profile button:hover {
+  background: #28a03c;
+  transition: background-color 0.2s 0.2s;
+}
+
+/* ---------- PROFILE DROPDOWN ---------- */
+.profile-dropdown {
+  position: relative;
+}
+
+.profile-dropdown img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.profile-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+}
+
+.profile-dropdown:hover .profile-menu {
+  display: block;
+}
+
+.profile-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.profile-menu li a {
+  display: block;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: black;
+}
+
+.profile-menu li a:hover {
+  background-color: #f1f1f1;
+}
+
+/* ---------- PAGE CONTAINER ---------- */
+.container {
+  padding: 20px;
+}
+
+.title-section h1 {
+  font-size: 2.3rem;
+  font-weight: 800;
+  color: #2e7d32;
+  margin-bottom: 10px;
+  letter-spacing: -0.5px;
+}
+
+.title-section span {
+  border-bottom: 3px solid #2e7d32;
+  padding-bottom: 3px;
+}
+
+/* ---------- ADD ARTICLE FORM ---------- */
+#addArticleForm {
+  background-color: #d9f0da;
+  padding: 25px;
+  border-radius: 10px;
+  margin-top: 20px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+#addArticleForm input,
+#addArticleForm select {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+#addArticleForm input:focus,
+#addArticleForm select:focus {
+  border-color: #2e7d32;
+}
+
+#addArticleForm button {
+  background-color: #2e7d32;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  align-self: flex-start;
+  transition: background-color 0.2s ease;
+}
+
+#addArticleForm button:hover {
+  background-color: #256428;
+}
+
+/* ---------- ARTICLE GRID ---------- */
+.grid-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  margin-top: 30px;
+}
+
+.box {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 250px;
+  color: white;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.5);
+}
+
+.box-content {
+  width: 100%;
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.box-content h3 {
+  margin: 0;
+  font-size: 1.3em;
+  font-weight: bold;
+}
+
+.box-content p {
+  margin: 5px 0 10px;
+  font-size: 0.9em;
+}
+
+.box-content button {
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  font-weight: bold;
+  margin-right: 8px;
+  transition: background-color 0.3s;
+}
+
+button.editBtn {
+  background-color: #ffa726;
+}
+button.editBtn:hover {
+  background-color: #fb8c00;
+}
+
+button.deleteBtn {
+  background-color: #e53935;
+}
+button.deleteBtn:hover {
+  background-color: #c62828;
+}
+
+/* ---------- FOOTER ---------- */
+footer {
+  background-color: #418644;
+  color: white;
+  text-align: center;
+  padding: 25px;
+  font-size: 0.9rem;
+  border-top: 1px solid #317434;
+  margin-top: 40px;
+}
+
+footer .footer-bottom {
+  font-size: 0.85rem;
+  margin-top: 10px;
+  color: #d6f5d8;
+}

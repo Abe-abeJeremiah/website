@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link href="css/admin_dashboard.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manage Articles - Tagum News Admin</title>
+  <script type="module" src="javascript/ManageArticles.js" defer></script>
+</head>
+
+<body>
+  <header>
+    <div>
+      <strong id="local-news">TAGUM NEWS - ADMIN</strong>
+    </div>
+
+    <nav>
+      <a href="admin_dashboard.html">DASHBOARD</a>
+      <a href="admin_manage_articles.html" class="active">MANAGE ARTICLES</a>
+    </nav>
+
+    <form class="search-profile" id="searchForm">
+      <input type="text" id="searchInput" placeholder="Search articles..." />
+      <button type="submit"><i class="fa fa-search"></i></button>
+      <div class="profile-dropdown">
+        <img src="assets/profile1.png" id="nav-photo" class="Profile" />
+        <div class="profile-menu">
+          <ul class="menu-list">
+            <li><a href="admin_profile.html">Profile</a></li>
+            <li><a href="#" id="logoutBtn">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </form>
+  </header>
+
+  <div class="container">
+    <div class="title-section">
+      <h1>Manage Published Articles</h1>
+      <p>View, edit, and delete news articles. Updates reflect in real-time.</p>
+    </div>
+
+    <div class="grid-layout" id="articleContainer">
+      <!-- Articles will appear here -->
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-Block">
+      <div class="Block brand">
+        <h2>Tagum News Admin</h2>
+        <p>Manage Tagum News content with real-time updates.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2025 Tagum News. Admin Panel.</div>
+  </footer>
+</body>
+</html>

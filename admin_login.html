@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Login - Tagum News</title>
+    <link rel="stylesheet" href="css/login_style.css" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <script type="module" src="javascript/AdminLogin.js" defer></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="form-container">
+        <div class="form-blob">
+          <img src="assets/blob.svg" alt="Blob" class="blob-image blob-image--1" />
+          <img src="assets/blob.svg" alt="Blob" class="blob-image blob-image--2" />
+          <img src="assets/blob.svg" alt="Blob" class="blob-image blob-image--3" />
+        </div>
+
+        <div class="form-header">
+          <h1 class="form-title">Admin Sign In</h1>
+          <p class="form-subtitle">Access the Tagum News Admin Dashboard</p>
+        </div>
+
+        <form class="form-box" id="adminLoginForm">
+          <div class="input-group">
+            <input
+              type="email"
+              id="adminEmail"
+              class="input-field"
+              placeholder="required"
+              required
+            />
+            <label for="adminEmail" class="floating-label">Admin Email</label>
+          </div>
+
+          <div class="input-group">
+            <input
+              type="password"
+              id="adminPassword"
+              class="input-field"
+              placeholder="required"
+              required
+            />
+            <label for="adminPassword" class="floating-label">Password</label>
+            <div class="eye-icon" onclick="toggleAdminPassword()">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-eye"
+              >
+                <path
+                  d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"
+                />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
+            </div>
+          </div>
+
+          <button type="submit" class="form-btn form-btn--submit">
+            Sign In as Admin
+          </button>
+        </form>
+
+        <div class="form-bottom">
+          <p>
+            Go back to
+            <a href="index.html" class="form-link">User Sign In</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

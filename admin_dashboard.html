@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link href="css/admin_dashboard.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard - Tagum News</title>
+  <script type="module" src="javascript/AdminDashboard.js" defer></script>
+</head>
+
+<body>
+  <header>
+    <div>
+      <strong id="local-news">TAGUM NEWS - ADMIN</strong>
+    </div>
+
+    <nav>
+      <a href="admin_dashboard.html" class="active">DASHBOARD</a>
+      <a href="admin_manage_articles.html">MANAGE ARTICLES</a>
+    </nav>
+
+    <form class="search-profile">
+      <input type="text" placeholder="Search.." />
+      <button type="submit"><i class="fa fa-search"></i></button>
+      <div class="profile-dropdown">
+        <img src="assets/profile1.png" id="nav-photo" class="Profile" />
+        <div class="profile-menu">
+          <ul class="menu-list">
+            <li><a href="admin_profile.html">Profile</a></li>
+            <li><a href="#" id="logoutBtn">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </form>
+  </header>
+
+  <div class="container">
+    <div class="title-section">
+      <h1>Welcome, <span id="adminName">Admin</span></h1>
+      <p>Publish and manage Tagum News articles. Changes instantly appear on the homepage.</p>
+    </div>
+    <br>
+
+    <!-- ADD ARTICLE FORM -->
+    <div style="background:#d9f0da; padding:20px; border-radius:10px; margin-bottom:30px; box-shadow:0 4px 10px rgba(0,0,0,0.1);">
+      <h2 style="color:#2e7d32; margin-bottom:15px;">Add New Article</h2>
+      <form id="addArticleForm" style="display:flex; flex-direction:column; gap:10px; max-width:600px;">
+        <input type="text" id="titleInput" placeholder="Article Title" required 
+               style="padding:10px; border-radius:5px; border:1px solid #ccc; font-size:1rem;">
+        <input type="text" id="imageInput" placeholder="Image URL" required 
+               style="padding:10px; border-radius:5px; border:1px solid #ccc; font-size:1rem;">
+        <input type="text" id="linkInput" placeholder="Article Link" required 
+               style="padding:10px; border-radius:5px; border:1px solid #ccc; font-size:1rem;">
+               <select id="categorySelect">
+                <option value="sports">Sports</option>
+                <option value="events">Events</option>
+                <option value="crime-safety">Crime & Safety</option>
+                <option value="public-service">Public Service</option>
+                <option value="public-governance">Public Governance</option>
+                <option value="health-sanitation">Health & Sanitation</option>
+                <option value="traffic-transport">Traffic & Transport</option>
+                <option value="economy-business">Economy & Business</option>
+                <option value="lifestyle-community">Lifestyle & Community</option>
+                <option value="youth-education">Youth & Education</option>
+              </select>
+              
+
+        <button type="submit" style="
+          background-color:#2e7d32; 
+          color:white; 
+          padding:10px 20px; 
+          border:none; 
+          border-radius:5px; 
+          cursor:pointer; 
+          font-weight:bold;
+          align-self:flex-start;">
+          Publish Article
+        </button>
+      </form>
+    </div>
+
+  <footer class="site-footer">
+    <div class="footer-Block">
+      <div class="Block brand">
+        <h2>Tagum News Admin</h2>
+        <p>Manage Tagum News content with real-time updates.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2025 Tagum News. Admin Panel.</div>
+  </footer>
+</body>
+</html>

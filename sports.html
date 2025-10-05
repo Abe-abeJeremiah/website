@@ -1,171 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link href="css/news.css" rel="stylesheet" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tagum Sports</title>
-  </head>
-  <body>
-    <header>
-      <div>
-        <strong id="local-news">TAGUM NEWS</strong>
-      </div>
+<head>
+  <meta charset="UTF-8" />
+  <link href="css/news.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tagum Sports</title>
+  <script type="module" src="javascript/categoryFeed.js" defer></script>
+</head>
 
-      <nav>
-        <a href = "news.html" >HOME</a>
-        <a href = "sports.html" class="active">SPORTS</a>
-        <a href = "culture-events.html" >EVENTS</a>
-        <div class="dropdown">
-          <a>MORE</a>
-          <div class="dropdown-content">
-            <a href = "crime-safety.html" >CRIME & SAFETY</a>
-            <a href = "public-service.html" >PUBLIC SERVICE</a>
-            <a href = "public-governance.html" >PUBLIC GOVERNANCE</a>
-            <a href = "health-sanitation.html" >HEALTH & SANITATION</a>
-            <a href = "traffic-transport.html" >TRAFFIC & TRANSPORT</a>
-            <a href = "economy-business.html" >ECONOMY & BUSINESS</a>
-            <a href = "lifestyle-community.html" >LIFESTYLE & COMMUNITY</a>
-            <a href = "youth-education.html" >YOUTH & EDUCATION</a>
-          </div>
+<body>
+  <header>
+    <div><strong id="local-news">TAGUM NEWS</strong></div>
+    <nav>
+      <a href="news.html">HOME</a>
+      <a href="sports.html" class="active">SPORTS</a>
+      <a href="culture-events.html">EVENTS</a>
+      <div class="dropdown">
+        <a>MORE</a>
+        <div class="dropdown-content">
+          <a href="crime-safety.html">CRIME & SAFETY</a>
+          <a href="public-service.html">PUBLIC SERVICE</a>
+          <a href="public-governance.html">PUBLIC GOVERNANCE</a>
+          <a href="health-sanitation.html">HEALTH & SANITATION</a>
+          <a href="traffic-transport.html">TRAFFIC & TRANSPORT</a>
+          <a href="economy-business.html">ECONOMY & BUSINESS</a>
+          <a href="lifestyle-community.html">LIFESTYLE & COMMUNITY</a>
+          <a href="youth-education.html">YOUTH & EDUCATION</a>
         </div>
-      </nav>
+      </div>
+    </nav>
 
-      <form class="search-profile">
-        <input type="text" placeholder="Search.." />
-        <button type="submit"><i class="fa fa-search"></i></button>
-        <div class="profile-dropdown">
-          <img src="assets/profile1.png" class="Profile" />
-          <div class="profile-menu">
-            <ul class="menu-list">
-              <li><a href="profile.html">Profile</a></li>
-              <li><a href="About.html">About</a></li>
-              <li><a href="index.html">Logout</a></li>
-            </ul>
-          </div>
+    <form class="search-profile">
+      <input type="text" placeholder="Search.." />
+      <button type="submit"><i class="fa fa-search"></i></button>
+      <div class="profile-dropdown">
+        <img src="assets/profile1.png" class="Profile" />
+        <div class="profile-menu">
+          <ul class="menu-list">
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="About.html">About</a></li>
+            <li><a href="index.html">Logout</a></li>
+          </ul>
         </div>
-      </form>
-    </header>
-
-    <div class="container">
-      <div class="title-section">
-        <h1>SPORTS</h1>
       </div>
+    </form>
+  </header>
 
-      <div class="grid-layout">
-        <!-- NEWS 1 -->
-        <a
-          href="https://www.sunstar.com.ph/davao/regional-pride-soars-as-davraa-2025-opens"
-          target="_blank"
-          style="text-decoration: none; outline: none"
-        >
-          <div
-            class="box"
-            style="
-              background-image: url('https://media.assettype.com/sunstar%2F2025-03-10%2Flqz8vnml%2FUntitled-1.jpg?w=1024&auto=format%2Ccompress&fit=max');
-              background-size: cover;
-              background-position: center;
-              height: 250px;
-              color: white;
-              display: flex;
-              align-items: flex-end;
-              border-radius: 10px;
-              overflow: hidden;
-              position: relative;
-            "
-          >
-            <div
-              style="
-                width: 100%;
-                padding: 15px;
-                font-size: 1.2em;
-                font-weight: bold;
-                text-align: left;
-                text-shadow: 1px 1px 3px black;
-              "
-            >
-              Regional pride soars as Davraa 2025 opens
-            </div>
-          </div>
-        </a>
-
-        <!-- NEWS 2 -->
-        <a
-          href="https://pia.gov.ph/2025-regional-athletic-meet-brings-together-8000-delegates-to-davnor/"
-          target="_blank"
-          style="text-decoration: none; outline: none"
-        >
-          <div
-            class="box"
-            style="
-              background-image: url('https://pia.gov.ph/wp-content/uploads/2025/03/483485704_1087984926690361_1417130347577478893_n.jpg');
-              background-size: cover;
-              background-position: center;
-              height: 250px;
-              color: white;
-              display: flex;
-              align-items: flex-end;
-              border-radius: 10px;
-              overflow: hidden;
-              position: relative;
-            "
-          >
-            <div
-              style="
-                width: 100%;
-                padding: 15px;
-                font-size: 1.2em;
-                font-weight: bold;
-                text-align: left;
-                text-shadow: 1px 1px 3px black;
-              "
-            >
-              2025 regional athletic meet brings together 8,000 delegates to
-              DavNor
-            </div>
-          </div>
-        </a>
-
-        <a
-          href="https://www.facebook.com/CitySportsDevelopmentOffice/"
-          target="_blank"
-          style="text-decoration: none; outline: none"
-        >
-          <div
-            class="box"
-            style="
-              background-image: url('https://scontent.fdvo6-1.fna.fbcdn.net/v/t39.30808-6/448458169_425489230465815_1976782154751980374_n.png?stp=dst-png_s960x960&_nc_cat=109&ccb=1-7&_nc_sid=cc71e4&_nc_eui2=AeHS9TuZ56mVz2JMBNuZL-OgpVEa0X72T-ylURrRfvZP7LzTS88QnXVOoLpcZeWezRNWAzcxT0c9LhLZj36a_1nA&_nc_ohc=MiPERxM5lAQQ7kNvwHBmZKR&_nc_oc=AdlRLcPS-IcbdkpWf5Ahkub9p7OCuH3mRTBkGUUkhELnEbs7KUxvSWM8QYRjNOlW5D8&_nc_zt=23&_nc_ht=scontent.fdvo6-1.fna&_nc_gid=RMvEspbZi50LhXIMuYQNWw&oh=00_AfJxZZgN7sirbeNHPfVAlfe469AhBHDr-f7TWVraMoPoEQ&oe=682135A3');
-              background-size: cover;
-              background-position: center;
-              height: 250px;
-              color: white;
-              display: flex;
-              align-items: flex-end;
-              border-radius: 10px;
-              overflow: hidden;
-              position: relative;
-            "
-          >
-            <div
-              style="
-                width: 100%;
-                padding: 15px;
-                font-size: 1.2em;
-                font-weight: bold;
-                text-align: left;
-                text-shadow: 1px 1px 3px black;
-              "
-            >
-            City Sports Development Office-Tagum City 
-            </div>
-          </div>
-        </a>
-      </div>
+  <div class="container">
+    <div class="title-section">
+      <h1>SPORTS</h1> 
     </div>
+
+    <!-- 🔄 Articles will load dynamically -->
+    <div class="grid-layout">
+      <p style="text-align:center; color:gray;">Loading sports articles...</p>
+    </div> 
+
     <br>
     <br>
     <footer class="site-footer">
@@ -177,7 +68,7 @@
             trusted source for local news and assistance.
           </p>
         </div>
-
+  
         <div class="Block hotlines">
           <h3>LOCAL HOTLINES</h3>
           <ul>
@@ -203,19 +94,19 @@
             </li>
           </ul>
         </div>
-
+  
         <div class="Block links">
           <h3>Quick Links</h3>
           <ul>
             <li><a href="news.html">Home</a></li>
-            <li><a href="#">About Us</a></li>
+            <li><a href="About.html">About Us</a></li>
           </ul>
         </div>
       </div>
-
+  
       <div class="footer-bottom">
         &copy; 2025 Tagum Today. All rights reserved.
       </div>
     </footer>
   </body>
-</html>
+  </html>

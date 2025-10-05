@@ -43,16 +43,7 @@ googleLogin.addEventListener("click", function () {
   signInWithPopup(auth, provider)
     .then(async (result) => {
       const user = result.user;
-
-      // ✅ Check if user already exists in Firestore
-      const userDoc = await getDoc(doc(db, "users", user.uid));
-      if (!userDoc.exists()) {
-        // 🚫 Prevent login if not signed up
-        alert("This Google account is not registered. Please sign up first.");
-        await auth.signOut();
-        return;
-      }
-
+      
       console.log("Google login success:", user.displayName || user.email);
       window.location.href = "news.html";
     })
