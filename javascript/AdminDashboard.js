@@ -1,10 +1,10 @@
-// ✅ AdminDashboard.js
+// ✅ Firebase Imports
 import { 
   initializeApp 
 } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
 
 import { 
-  getFirestore, collection, onSnapshot, addDoc, updateDoc, deleteDoc, doc, getDoc, serverTimestamp 
+  getFirestore, collection, onSnapshot, addDoc, updateDoc, doc, serverTimestamp, query, orderBy 
 } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 
 import { 
@@ -27,7 +27,7 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
-// 🧍 Admin Auth Check
+// 🧍 Admin Authentication
 onAuthStateChanged(auth, (user) => {
   if (user) {
     document.getElementById("adminName").textContent = user.displayName || user.email;
@@ -42,72 +42,118 @@ document.getElementById("logoutBtn").addEventListener("click", async () => {
   window.location.href = "admin_login.html";
 });
 
-// 🎯 Firestore References
+// 🔗 Firestore References
 const articleContainer = document.getElementById("articleContainer");
-let editId = null;
+const totalArticlesEl = document.getElementById("totalArticles");
+const totalCategoriesEl = document.getElementById("totalCategories");
+const latestArticleDateEl = document.getElementById("latestArticleDate");
+const activityList = document.getElementById("activityList");
+const searchInput = document.getElementById("searchInput");
 
-// 🧩 Check if redirected from Manage Articles page
-const savedEdit = localStorage.getItem("editArticle");
-if (savedEdit) {
-  const article = JSON.parse(savedEdit);
+let allArticles = [];
+
+const editArticleData = localStorage.getItem("editArticle");
+if (editArticleData) {
+  const article = JSON.parse(editArticleData);
+
+  // Prefill form
   document.getElementById("titleInput").value = article.title;
   document.getElementById("imageInput").value = article.image;
   document.getElementById("linkInput").value = article.link;
   document.getElementById("categorySelect").value = article.category;
-  editId = article.id;
-  localStorage.removeItem("editArticle"); // Clear it after loading
 
-  // ✅ Optional: Add a "Back to Manage Articles" button dynamically
-  const backBtn = document.createElement("button");
-  backBtn.textContent = "← Back to Manage Articles";
-  backBtn.style.backgroundColor = "#555";
-  backBtn.style.color = "white";
-  backBtn.style.padding = "8px 15px";
-  backBtn.style.border = "none";
-  backBtn.style.borderRadius = "5px";
-  backBtn.style.marginTop = "10px";
-  backBtn.style.cursor = "pointer";
-  backBtn.addEventListener("click", () => window.location.href = "admin_manage_articles.html");
-  document.querySelector(".title-section").appendChild(backBtn);
+  // Change button label
+  const submitBtn = document.querySelector("#addArticleForm button");
+  submitBtn.textContent = "Update Article";
+
+  // Add “Edit Mode” Notice
+  const notice = document.createElement("div");
+  notice.textContent = `You’re editing: ${article.title}`;
+  notice.style.background = "#fff3cd";
+  notice.style.color = "#856404";
+  notice.style.padding = "10px";
+  notice.style.marginBottom = "15px";
+  notice.style.border = "1px solid #ffeeba";
+  notice.style.borderRadius = "6px";
+  document.querySelector(".title-section").after(notice);
+
+  document.getElementById("addArticleForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const updatedTitle = document.getElementById("titleInput").value.trim();
+    const updatedImage = document.getElementById("imageInput").value.trim();
+    const updatedLink = document.getElementById("linkInput").value.trim();
+    const updatedCategory = document.getElementById("categorySelect").value.toLowerCase().trim();
+
+    if (!updatedTitle || !updatedImage || !updatedLink || !updatedCategory) {
+      alert("Please fill in all fields.");
+      return;
+    }
+
+    try {
+      const articleRef = doc(db, "articles", article.id);
+      await updateDoc(articleRef, {
+        title: updatedTitle,
+        image: updatedImage,
+        link: updatedLink,
+        category: updatedCategory,
+        timestamp: serverTimestamp(),
+      });
+
+      alert("Article updated successfully!");
+      logActivity("Updated article", updatedTitle);
+      localStorage.removeItem("editArticle");
+      window.location.href = "admin_manage_articles.html";
+    } catch (error) {
+      console.error("Error updating article:", error);
+      alert("Error: " + error.message);
+    }
+  });
 }
 
-// 🔄 Real-time Article List
+// 🔄 Real-time Article Overview
 onSnapshot(collection(db, "articles"), (snapshot) => {
   articleContainer.innerHTML = "";
+  allArticles = [];
+
   snapshot.forEach((docSnap) => {
     const data = docSnap.data();
+    allArticles.push({ id: docSnap.id, ...data });
+
     const articleDiv = document.createElement("div");
     articleDiv.classList.add("box");
     articleDiv.style.backgroundImage = `url(${data.image})`;
     articleDiv.style.backgroundSize = "cover";
     articleDiv.style.backgroundPosition = "center";
-    articleDiv.style.height = "250px";
-    articleDiv.style.borderRadius = "10px";
-    articleDiv.style.overflow = "hidden";
-    articleDiv.style.position = "relative";
 
     articleDiv.innerHTML = `
-      <div style="background: rgba(0, 0, 0, 0.6); padding: 10px; color: white;">
+      <div class="box-content">
         <h3>${data.title}</h3>
-        <p style="font-size: 0.9em;">Category: ${data.category}</p>
-        <div style="margin-top: 5px;">
-          <button class="editBtn" data-id="${docSnap.id}"
-            style="background-color: orange; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer; margin-right:5px;">
-            Edit
-          </button>
-          <button class="deleteBtn" data-id="${docSnap.id}"
-            style="background-color:red; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer;">
-            Delete
-          </button>
-        </div>
+        <p>Category: ${data.category}</p>
       </div>
     `;
+
     articleContainer.appendChild(articleDiv);
   });
+
+  // 📊 Stats Update
+  totalArticlesEl.textContent = allArticles.length;
+  const uniqueCategories = new Set(allArticles.map(a => a.category));
+  totalCategoriesEl.textContent = uniqueCategories.size;
+
+  if (allArticles.length > 0) {
+    const latest = allArticles.sort((a, b) => b.timestamp?.seconds - a.timestamp?.seconds)[0];
+    latestArticleDateEl.textContent = latest.timestamp
+      ? new Date(latest.timestamp.seconds * 1000).toLocaleDateString()
+      : "–";
+  } else {
+    latestArticleDateEl.textContent = "–";
+  }
 });
 
-// 📝 Add / Update Article
+// 📝 Add New Article (Normal Mode)
 document.getElementById("addArticleForm").addEventListener("submit", async (e) => {
+  if (editArticleData) return; // prevent overwrite while editing
   e.preventDefault();
 
   const title = document.getElementById("titleInput").value.trim();
@@ -116,63 +162,64 @@ document.getElementById("addArticleForm").addEventListener("submit", async (e) =
   const category = document.getElementById("categorySelect").value.toLowerCase().trim();
 
   if (!title || !image || !link || !category) {
-    alert("⚠️ Please fill in all fields.");
+    alert("Please fill in all fields.");
     return;
   }
 
-  console.log("📰 Saving article:", { title, image, link, category });
-
   try {
-    if (editId) {
-      // ✏️ Update existing article
-      await updateDoc(doc(db, "articles", editId), { 
-        title, image, link, category 
-      });
-      alert("✅ Article updated successfully!");
-      editId = null;
-    } else {
-      // ➕ Add new article
-      await addDoc(collection(db, "articles"), {
-        title,
-        image,
-        link,
-        category,
-        timestamp: serverTimestamp()
-      });
-      alert("✅ Article added successfully!");
-    }
-
+    await addDoc(collection(db, "articles"), {
+      title,
+      image,
+      link,
+      category,
+      timestamp: serverTimestamp(),
+    });
+    alert("Article added successfully!");
+    logActivity("Added new article", title);
     e.target.reset();
   } catch (error) {
-    console.error("❌ Error saving article:", error);
+    console.error("Error adding article:", error);
     alert("Error: " + error.message);
   }
 });
 
-// ✏️ Edit + 🗑️ Delete Listeners
-document.addEventListener("click", async (e) => {
-  if (e.target.classList.contains("editBtn")) {
-    const id = e.target.getAttribute("data-id");
-    const snapshot = await getDoc(doc(db, "articles", id));
-    if (snapshot.exists()) {
-      const data = snapshot.data();
-      document.getElementById("titleInput").value = data.title;
-      document.getElementById("imageInput").value = data.image;
-      document.getElementById("linkInput").value = data.link;
-      document.getElementById("categorySelect").value = data.category;
-      editId = id;
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    } else {
-      alert("⚠️ Article not found.");
-    }
-  }
-
-  if (e.target.classList.contains("deleteBtn")) {
-    const id = e.target.getAttribute("data-id");
-    if (confirm("🗑️ Delete this article?")) {
-      await deleteDoc(doc(db, "articles", id));
-      alert("✅ Article deleted!");
-    }
-  }
+// 🔍 Live Search (Header Search)
+searchInput?.addEventListener("input", () => {
+  const query = searchInput.value.toLowerCase();
+  const boxes = document.querySelectorAll(".box");
+  boxes.forEach(box => {
+    const title = box.querySelector("h3").textContent.toLowerCase();
+    box.style.display = title.includes(query) ? "block" : "none";
+  });
 });
 
+// 🧾 Real-time Activity List (Persistent)
+const activityQuery = query(collection(db, "admin_activities"), orderBy("timestamp", "desc"));
+onSnapshot(activityQuery, (snapshot) => {
+  activityList.innerHTML = "";
+  snapshot.forEach((docSnap) => {
+    const data = docSnap.data();
+    const li = document.createElement("li");
+    const time = data.timestamp ? new Date(data.timestamp.seconds * 1000).toLocaleTimeString() : "";
+    li.textContent = `${data.action}: "${data.title}" – ${time}`;
+    activityList.appendChild(li);
+  });
+
+  // Keep only latest 5
+  while (activityList.children.length > 5) {
+    activityList.removeChild(activityList.lastChild);
+  }
+}); 
+
+// 🧾 Save Admin Activity to Firestore
+async function logActivity(action, title) {
+  try {
+    await addDoc(collection(db, "admin_activities"), {
+      action,
+      title,
+      timestamp: serverTimestamp()
+    });
+  } catch (error) {
+    console.error("Error saving activity:", error);
+  }
+}

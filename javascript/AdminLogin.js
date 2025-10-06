@@ -1,4 +1,3 @@
-// Import Firebase SDKs
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
 import {
   getAuth,
@@ -11,7 +10,6 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 import { setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
 
-// Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyAcjbUD8sY7nUN_FuQSJDEszBl1EvjRzoM",
   authDomain: "knee-gears.firebaseapp.com",
@@ -22,12 +20,11 @@ const firebaseConfig = {
   measurementId: "G-X9DW3QH8DV",
 };
 
-// Initialize Firebase
+
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// Form submit listener
 document
   .getElementById("adminLoginForm")
   .addEventListener("submit", async (e) => {
@@ -39,16 +36,15 @@ document
     await setPersistence(auth, browserLocalPersistence);
 
     try {
-      // Sign in admin
+    
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
-      // Check role in Firestore
       const docRef = doc(db, "users", user.uid);
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists() && docSnap.data().role === "admin") {
-        // ✅ Redirect to Admin Dashboard
+       
         window.location.href = "admin_dashboard.html";
       } else {
         alert("Access denied. You are not an admin.");
@@ -60,7 +56,6 @@ document
     }
   });
 
-// Toggle password visibility
 window.toggleAdminPassword = function () {
   const passwordField = document.getElementById("adminPassword");
   passwordField.type =

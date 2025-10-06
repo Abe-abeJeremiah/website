@@ -1,4 +1,3 @@
-// ✅ ManageArticles.js — Admin Manage Page (Edit → Dashboard)
 import { 
     initializeApp 
   } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
@@ -9,7 +8,6 @@ import {
     getAuth, onAuthStateChanged, signOut 
   } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
   
-  // 🔥 Firebase Config
   const firebaseConfig = {
     apiKey: "AIzaSyAcjbUD8sY7nUN_FuQSJDEszBl1EvjRzoM",
     authDomain: "knee-gears.firebaseapp.com",
@@ -20,12 +18,10 @@ import {
     measurementId: "G-X9DW3QH8DV"
   };
   
-  // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
   const auth = getAuth(app);
   
-  // 🧍 Admin Auth Check
   onAuthStateChanged(auth, (user) => {
     if (user) {
       document.getElementById("adminName").textContent = user.displayName || user.email;
@@ -33,19 +29,16 @@ import {
       window.location.href = "admin_login.html";
     }
   });
-  
-  // 🚪 Logout
+
   document.getElementById("logoutBtn").addEventListener("click", async () => {
     await signOut(auth);
     window.location.href = "admin_login.html";
   });
   
-  // 📰 Manage Articles
   const articleContainer = document.getElementById("articleContainer");
   const searchInput = document.querySelector('.search-profile input[type="text"]');
   let allArticles = [];
   
-  // 🔄 Real-time Firestore Listener
   onSnapshot(collection(db, "articles"), (snapshot) => {
     allArticles = [];
     articleContainer.innerHTML = "";
@@ -107,18 +100,18 @@ import {
     });
   }
   
-  // 🧠 Edit + Delete Functionality
+  
   document.addEventListener("click", async (e) => {
-    // 🗑️ Delete
+   
     if (e.target.classList.contains("deleteBtn")) {
       const id = e.target.getAttribute("data-id");
-      if (confirm("🗑️ Delete this article?")) {
+      if (confirm("Delete this article?")) {
         await deleteDoc(doc(db, "articles", id));
-        alert("✅ Article deleted!");
+        alert("Article deleted!");
       }
     }
   
-    // ✏️ Edit → Redirect to Dashboard
+
     if (e.target.classList.contains("editBtn")) {
       const id = e.target.getAttribute("data-id");
       const article = allArticles.find((a) => a.id === id);
@@ -129,7 +122,7 @@ import {
         // Redirect to dashboard for editing
         window.location.href = "admin_dashboard.html";
       } else {
-        alert("⚠️ Article not found.");
+        alert("Article not found.");
       }
     }
   });
