@@ -237,7 +237,7 @@ body {
 }
 
 #phone-login-btn:hover {
-  border-color: var(--color-primary);
+  border-color: var(--color-divider);
 }
 
 /* SIGN-UP LINK */
