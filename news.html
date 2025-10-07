@@ -7,8 +7,11 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tagum News</title>
+  <script type="module" src="javascript/firebase-config.js"></script>
+  <script type="module" src="javascript/profile.js" defer></script>
   <script type="module" src="javascript/Logs.js" defer></script>
   <script type="module" src="javascript/newsFeed.js" defer></script>
+
 </head>
 
 <body>
@@ -40,12 +43,12 @@
       <input type="text" placeholder="Search.." />
       <button type="submit"><i class="fa fa-search"></i></button>
       <div class="profile-dropdown">
-        <img src="assets/profile1.png" class="Profile" />
+        <img id="nav-photo" src="https://via.placeholder.com/150" alt="User photo"/>
         <div class="profile-menu">
           <ul class="menu-list">
             <li><a href="profile.html">Profile</a></li>
             <li><a href="About.html">About</a></li>
-            <li><a href="index.html">Logout</a></li>
+            <li><a href="#" onclick="logout()">Logout</a></li>
           </ul>
         </div>
       </div>
@@ -132,5 +135,7 @@
       &copy; 2025 Tagum Today. All rights reserved.
     </div>
   </footer>
+
+
 </body>
 </html>
