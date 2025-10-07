@@ -9,6 +9,8 @@
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tagum Lifestyle & Community</title>
+    <script type="module" src="javascript/firebase-config.js"></script>
+    <script type="module" src="javascript/profile.js" defer></script>
     <script type="module" src="javascript/categoryFeed.js" defer></script>
   </head>
   <body>
@@ -36,20 +38,20 @@
         </div>
       </nav>
 
-      <form class="search-profile">
-        <input type="text" placeholder="Search.." />
-        <button type="submit"><i class="fa fa-search"></i></button>
-        <div class="profile-dropdown">
-          <img src="assets/profile1.png" class="Profile" />
-          <div class="profile-menu">
-            <ul class="menu-list">
-              <li><a href="profile.html">Profile</a></li>
-              <li><a href="About.html">About</a></li>
-              <li><a href="index.html">Logout</a></li>
-            </ul>
-          </div>
+    <form class="search-profile">
+      <input type="text" placeholder="Search.." />
+      <button type="submit"><i class="fa fa-search"></i></button>
+      <div class="profile-dropdown">
+        <img id="nav-photo" src="https://via.placeholder.com/150" alt="User photo"/>
+        <div class="profile-menu">
+          <ul class="menu-list">
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="About.html">About</a></li>
+            <li><a href="#" onclick="logout()">Logout</a></li>
+          </ul>
         </div>
-      </form>
+      </div>
+    </form>
     </header>
 
     <div class="container">
